@@ -1,0 +1,14 @@
+<div class="row justify-content-md-center mb-3">
+  <div class="offset-md-2 col-md-8 entry">
+    <form (ngSubmit)="AddTodo($event)" #todoForm="ngForm">
+      <mat-card class="big-input">
+        <input [(ngModel)]="titlevalue" placeholder="Input Title" maxlength="30" required #title="ngModel" name="title" />
+        <!-- <button mat-raised-button color="primary">Primary</button> -->
+        <button mat-raised-button [disabled]="!todoForm.form.valid" matTooltip="Add new todo" [matTooltipPosition]="'before'"
+          aria-label="Button positions">
+          <mat-icon>add_box</mat-icon>
+        </button>
+      </mat-card>
+    </form>
+  </div>
+</div>

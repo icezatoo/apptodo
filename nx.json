@@ -13,6 +13,15 @@
     },
     "todo-e2e": {
       "tags": []
+    },
+    "todolib": {
+      "tags": []
+    },
+    "layout": {
+      "tags": []
+    },
+    "material": {
+      "tags": []
     }
   }
 }
