@@ -32,10 +32,12 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "apps/todo/src/environments/environment.ts",
-                "with": "apps/todo/src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "apps/todo/src/environments/environment.ts",
+                  "with": "apps/todo/src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -45,11 +47,13 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
@@ -201,6 +205,37 @@
             "jestConfig": "libs/material/jest.config.js",
             "tsConfig": "libs/material/tsconfig.spec.json",
             "setupFile": "libs/material/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "data-models": {
+      "root": "libs/data-models",
+      "sourceRoot": "libs/data-models/src",
+      "projectType": "library",
+      "prefix": "apptodo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/data-models/tsconfig.lib.json",
+              "libs/data-models/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/data-models/jest.config.js",
+            "tsConfig": "libs/data-models/tsconfig.spec.json",
+            "setupFile": "libs/data-models/src/test-setup.ts"
           }
         }
       },

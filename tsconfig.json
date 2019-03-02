@@ -15,12 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@apptodo/*": [
-        "libs/*"
-      ],
+      "@apptodo/*": ["libs/*"],
       "@apptodo/todolib": ["libs/todolib/src/index.ts"],
       "@apptodo/layout": ["libs/layout/src/index.ts"],
-      "@apptodo/material": ["libs/material/src/index.ts"]
+      "@apptodo/material": ["libs/material/src/index.ts"],
+      "@apptodo/data-models": ["libs/data-models/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
