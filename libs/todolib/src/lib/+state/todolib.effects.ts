@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
-import { DataPersistence } from '@nrwl/nx';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
+import { map, mergeMap, catchError, debounceTime } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { TodoService } from './../services/todo/todo.service';
+import * as Act from './todolib.actions';
+import { User } from '@apptodo/data-models';
 
-import { TodoPartialState } from './todolib.reducer';
-import {
-  LoadTodo,
-  TodoLoaded,
-  TodoLoadError,
-  TodoActionTypes
-} from './todolib.actions';
-
-@Injectable()
-export class TodolibEffects {
-  @Effect() loadTodolib$ = this.dataPersistence.fetch(
-    TodoActionTypes.LoadTodo,
-    {
-      run: (action: LoadTodo, state: TodoPartialState) => {
-        // Your custom REST 'load' logic goes here. For now just return an empty list...
-        return new TodoLoaded([]);
-      },
-
-      onError: (action: LoadTodo, error) => {
-        console.error('Error', error);
-        return new TodoLoadError(error);
-      }
-    }
+@Injectable({
+  providedIn: 'root'
+})
+export class TodoEffects {
+  @Effect()
+  loadTodolib$: Observable<Action> = this.actions$.pipe(
+    debounceTime(500),
+    ofType(Act.GET_TODO),
+    mergeMap(action =>
+      this.todoService.fetchTodoUser().pipe(
+        map(data => ({ type: Act.GET_TODO_SUCCESS, payload: data })),
+        catchError(err => of({ type: Act.GET_TODO_FAILED, payload: err }))
+      )
+    )
   );
 
-  constructor(
-    private actions$: Actions,
-    private dataPersistence: DataPersistence<TodoPartialState>
-  ) {}
+  constructor(private actions$: Actions, private todoService: TodoService) {}
 }

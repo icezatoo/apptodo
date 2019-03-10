@@ -1,15 +1,9 @@
-import { TodoAction, TodoActionTypes } from './todolib.actions';
+import * as Action from './todolib.actions';
 import { User } from '@apptodo/data-models';
+import { v4 as uuid } from 'uuid';
+
 export const TODOLIB_FEATURE_KEY = 'todolib';
-
-/**
- * Interface for the 'Todolib' data used in
- *  - TodolibState, and
- *  - todolibReducer
- *
- *  Note: replace if already defined in another module
- */
-
+export type TodoFilter = 'ALL' | 'DONE' | 'ACTIVE';
 /* tslint:disable:no-empty-interface */
 
 export interface TodoState {
@@ -17,6 +11,7 @@ export interface TodoState {
   selectedId?: string | number; // which Todolib record has been selected
   loaded: boolean; // has the Todolib list been loaded
   error?: any; // last none error (if any)
+  filter: TodoFilter;
 }
 
 export interface TodoPartialState {
@@ -25,57 +20,83 @@ export interface TodoPartialState {
 
 export const initialState: TodoState = {
   list: [],
-  loaded: false
+  loaded: false,
+  filter: 'ALL'
 };
-
-function getRandomInt(max: number) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
 
 export function todolibReducer(
   state: TodoState = initialState,
-  action: TodoAction
+  action: Action.Actions
 ): TodoState {
   switch (action.type) {
-    case TodoActionTypes.LoadTodo: {
-      state = {
+    case Action.GET_TODO: {
+      return {
         ...state,
-        loaded: false
+        loaded: true,
+        list: [],
+        filter: 'ALL'
       };
-      break;
     }
-    case TodoActionTypes.TodoLoaded: {
-      state = {
+    case Action.GET_TODO_SUCCESS: {
+      return {
         ...state,
-        list: action.payload,
-        loaded: true
+        loaded: false,
+        list: [...action.payload],
+        filter: 'ALL'
       };
-      break;
     }
-    case TodoActionTypes.AddTodo: {
-      const newData: User = {
+    case Action.GET_TODO_FAILED: {
+      return {
+        ...state,
+        loaded: false,
+        list: [],
+        filter: 'ALL',
+        error: action.payload
+      };
+    }
+    case Action.ADD_TODO: {
+      const newUser: User = {
         userId: 1,
-        id: this.getRandomInt(100),
+        id: uuid(),
         title: action.payload,
         completed: false
       };
-      state = {
+      return {
         ...state,
-        list: [newData, ...state.list],
-        loaded: true
+        loaded: false,
+        list: [newUser, ...state.list],
+        filter: 'ALL',
+        error: action.payload
       };
-      break;
     }
-    case TodoActionTypes.RemoveTodo: {
-      const newDataRemove = state.list.filter(
+
+    case Action.REMOVE_TODO: {
+      const newList = state.list.filter(
         (val: User) => val.id !== action.payload
       );
-      state = {
+      return {
         ...state,
-        list: [...newDataRemove],
-        loaded: true
+        loaded: false,
+        list: [...newList],
+        filter: 'ALL'
       };
-      break;
+    }
+
+    case Action.FILTER_TODO: {
+      return {
+        ...state,
+        filter: action.payload
+      };
+    }
+
+    case Action.TOGGLE_TODO: {
+      const newList = state.list.map(val =>
+        val.id === action.payload ? { ...val, completed: !val.completed } : val
+      );
+      return {
+        ...state,
+        list: [...newList]
+      };
     }
   }
   return state;

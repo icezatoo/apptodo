@@ -4,7 +4,6 @@ import { select, Store } from '@ngrx/store';
 
 import { TodoPartialState } from './todolib.reducer';
 import { todolibQuery } from './todolib.selectors';
-import { LoadTodo } from './todolib.actions';
 
 @Injectable()
 export class TodolibFacade {
@@ -13,8 +12,4 @@ export class TodolibFacade {
   selectedTodolib$ = this.store.pipe(select(todolibQuery.getSelectedTodolib));
 
   constructor(private store: Store<TodoPartialState>) {}
-
-  loadAll() {
-    this.store.dispatch(new LoadTodo());
-  }
 }

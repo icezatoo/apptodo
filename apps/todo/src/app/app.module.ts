@@ -4,7 +4,7 @@ import { NxModule } from '@nrwl/nx';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TodolibModule, todoRoutes } from '@apptodo/todolib';
+import { TodoModule, todoRoutes } from '@apptodo/todolib';
 import { LayoutModule } from '@apptodo/layout';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -21,11 +21,11 @@ import { storeFreeze } from 'ngrx-store-freeze';
     RouterModule.forRoot([{ path: '', children: todoRoutes }], {
       initialNavigation: 'enabled'
     }),
-    TodolibModule,
+    TodoModule,
     LayoutModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(
-      {},
+      {}
       // { metaReducers: !environment.production ? [storeFreeze] : [] }
     ),
     EffectsModule.forRoot([]),

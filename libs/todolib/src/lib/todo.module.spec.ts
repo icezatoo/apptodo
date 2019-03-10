@@ -1,14 +1,14 @@
 import { async, TestBed } from '@angular/core/testing';
-import { TodolibModule } from './todolib.module';
+import { TodoModule } from './todo.module';
 
 describe('TodolibModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TodolibModule]
+      imports: [TodoModule]
     }).compileComponents();
   }));
 
   it('should create', () => {
-    expect(TodolibModule).toBeDefined();
+    expect(TodoModule).toBeDefined();
   });
 });
