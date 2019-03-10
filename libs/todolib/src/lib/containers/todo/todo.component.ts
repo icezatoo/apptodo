@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodolibFacade } from '../../+state/todolib.facade';
 
 @Component({
   selector: 'apptodo-todo',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-
-  constructor() { }
+  constructor(private todolibServiceFacade: TodolibFacade) {}
 
   ngOnInit() {
+    this.todolibServiceFacade.fatchUserList();
   }
-
 }

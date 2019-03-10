@@ -12,12 +12,14 @@ import {
   MatMenuModule,
   MatTableModule,
   MatTooltipModule,
-  MatSelectModule
+  MatSelectModule,
+  MatChipsModule
 } from '@angular/material';
 
 @NgModule({
   imports: [
     // FlexLayoutModule,
+    MatChipsModule,
     MatTooltipModule,
     MatInputModule,
     MatCardModule,
@@ -33,6 +35,7 @@ import {
   ],
   exports: [
     // FlexLayoutModule,
+    MatChipsModule,
     MatTooltipModule,
     MatInputModule,
     MatCardModule,

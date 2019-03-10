@@ -5,6 +5,7 @@ import { TodoComponent } from './containers/todo/todo.component';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoHeaderComponent } from './components/todo-header/todo-header.component';
+import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
 import { MaterialModule } from '@apptodo/material';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -34,6 +35,7 @@ export const todoRoutes: Route[] = [{ path: '', component: TodoComponent }];
     EffectsModule.forFeature([TodoEffects])
   ],
   declarations: [
+    MenuHeaderComponent,
     TodoComponent,
     TodoFormComponent,
     TodoListComponent,
