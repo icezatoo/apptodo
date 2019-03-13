@@ -11,6 +11,7 @@ export class TodolibFacade {
   loaded$ = this.store.pipe(select(todolibQuery.getLoaded));
   allTodolib$ = this.store.pipe(select(todolibQuery.getAllTodolib));
   selectedTodolib$ = this.store.pipe(select(todolibQuery.getSelectedTodolib));
+  filterTodo$ = this.store.pipe(select(todolibQuery.getFilterTodo));
 
   constructor(private store: Store<TodoPartialState>) {}
 
@@ -24,5 +25,13 @@ export class TodolibFacade {
 
   public removeTodoList(id: string) {
     this.store.dispatch(new todoAction.RemoveTodolist(id));
+  }
+
+  public toggleTodoList(id: string) {
+    this.store.dispatch(new todoAction.ToggleTodolist(id));
+  }
+
+  public filterTodoList(filterMenu: string) {
+    this.store.dispatch(new todoAction.FilterTodolist(filterMenu));
   }
 }

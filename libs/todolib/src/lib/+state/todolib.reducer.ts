@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import * as Action from './todolib.actions';
 import { User } from '@apptodo/data-models';
 import { v4 as uuid } from 'uuid';
@@ -38,10 +39,14 @@ export function todolibReducer(
       };
     }
     case Action.GET_TODO_SUCCESS: {
+      const list: User[] = action.payload;
+      const dataListTodo = list
+        .filter((val, index) => index < 20)
+        .map(val => ({ ...val, id: val.id.toString() }));
       return {
         ...state,
         loaded: false,
-        list: [...action.payload],
+        list: [...dataListTodo],
         filter: 'ALL'
       };
     }

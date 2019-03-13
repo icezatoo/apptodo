@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-todo-form',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-form.component.scss']
 })
 export class TodoFormComponent implements OnInit {
+  @Output() addTodoList = new EventEmitter<string>(true);
+
   public titlevalue = '';
 
   constructor() {}
@@ -14,7 +16,7 @@ export class TodoFormComponent implements OnInit {
 
   AddTodo(event) {
     event.preventDefault();
-    // this.onaddtodo.emit(this.titlevalue);
+    this.addTodoList.emit(this.titlevalue);
     this.titlevalue = '';
   }
 }

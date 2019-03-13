@@ -8,6 +8,7 @@ const getLoaded = createSelector(
   getTodolibState,
   (state: TodoState) => state.loaded
 );
+
 const getError = createSelector(
   getTodolibState,
   (state: TodoState) => state.error
@@ -15,15 +16,21 @@ const getError = createSelector(
 
 const getAllTodolib = createSelector(
   getTodolibState,
-  getLoaded,
-  (state: TodoState, isLoaded) => {
-    return isLoaded ? state.list : [];
+  (state: TodoState) => {
+    return state.list;
   }
 );
+
 const getSelectedId = createSelector(
   getTodolibState,
   (state: TodoState) => state.selectedId
 );
+
+const getFilterTodo = createSelector(
+  getTodolibState,
+  (state: TodoState) => state.filter
+);
+
 const getSelectedTodolib = createSelector(
   getAllTodolib,
   getSelectedId,
@@ -37,5 +44,6 @@ export const todolibQuery = {
   getLoaded,
   getError,
   getAllTodolib,
+  getFilterTodo,
   getSelectedTodolib
 };

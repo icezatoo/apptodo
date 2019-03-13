@@ -1,13 +1,15 @@
 <div class="row justify-content-between">
-  <div class="col-4">
-    <h4>Todo List</h4>
-  </div>
+  <div class="col-4"><h4>Todo List</h4></div>
   <div class="col-4">
     <div style="float: right;">
       <mat-chip-list>
-        <mat-chip color="primary"
-                  selected>Displaying all 20 todo</mat-chip>
-        <app-menu-header></app-menu-header>
+        <mat-chip color="primary" selected
+          >Displaying all {{ todolist | count: filterStatus }} todo</mat-chip
+        >
+        <app-menu-header
+          [filter]="filterStatus"
+          (menuFilterClick)="menuFilterClick($event)"
+        ></app-menu-header>
       </mat-chip-list>
     </div>
   </div>

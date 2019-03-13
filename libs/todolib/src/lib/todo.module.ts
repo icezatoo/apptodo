@@ -19,6 +19,8 @@ import {
 import { TodoEffects } from './+state/todolib.effects';
 import { TodolibFacade } from './+state/todolib.facade';
 import { TodoService } from './services/todo/todo.service';
+import { FilterPipe } from './pipe/filter.pipe';
+import { TodoCountPipe } from './pipe/todo-count.pipe';
 
 export const todoRoutes: Route[] = [{ path: '', component: TodoComponent }];
 @NgModule({
@@ -39,7 +41,9 @@ export const todoRoutes: Route[] = [{ path: '', component: TodoComponent }];
     TodoComponent,
     TodoFormComponent,
     TodoListComponent,
-    TodoHeaderComponent
+    TodoHeaderComponent,
+    FilterPipe,
+    TodoCountPipe
   ],
   providers: [TodolibFacade, TodoService]
 })

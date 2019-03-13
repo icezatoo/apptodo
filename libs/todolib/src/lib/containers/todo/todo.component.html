@@ -1,13 +1,22 @@
 <div>
   <div class="row justify-content-center mb-3">
     <div class="col-12">
-      <app-todo-form></app-todo-form>
+      <app-todo-form (addTodoList)="addTodoList($event)"></app-todo-form>
     </div>
   </div>
   <div class="row ">
     <div class="col-md-12">
-      <app-todo-header></app-todo-header>
+      <app-todo-header
+        [todolist]="todoList$ | async"
+        [filterStatus]="filterMenu$ | async"
+        (menuHeaderClick)="menuHeaderClick($event)"
+      ></app-todo-header>
     </div>
   </div>
-  <app-todo-list></app-todo-list>
+  <app-todo-list
+    [todolist]="todoList$ | async"
+    [filter]="filterMenu$ | async"
+    (toggleTodoClick)="toggleTodoClick($event)"
+    (deleteTodoClick)="deleteTodoClick($event)"
+  ></app-todo-list>
 </div>

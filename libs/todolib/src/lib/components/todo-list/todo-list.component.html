@@ -1,3 +1,24 @@
-<p>
-  todo-list works!
-</p>
+<mat-list>
+  <div class="row justify-content-between">
+    <mat-list-item *ngFor="let item of (todolist | filter: filter)">
+      <div class="col-6">
+        <mat-checkbox
+          class="todolist-margin"
+          [checked]="item.completed"
+          (change)="onChangeCompleted(item.id)"
+        ></mat-checkbox>
+        <span>{{ item.title }}</span>
+      </div>
+      <div class="col-6">
+        <button
+          class="btn-right"
+          (click)="removeTodo(item.id)"
+          aria-label="tododelete"
+          mat-icon-button
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  </div>
+</mat-list>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 export interface Menu {
   value: string;
@@ -12,6 +12,9 @@ export interface Menu {
   styleUrls: ['./menu-header.component.scss']
 })
 export class MenuHeaderComponent implements OnInit {
+  @Input() filter: string = 'ALL';
+  @Output() menuFilterClick = new EventEmitter<string>(true);
+
   public menuFilter: Menu[] = [
     { value: 'ALL', title: 'All', icon: 'list' },
     { value: 'DONE', title: 'Done', icon: 'done' },
@@ -20,4 +23,8 @@ export class MenuHeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  onMenuFilter(value: string) {
+    this.menuFilterClick.emit(value);
+  }
 }
